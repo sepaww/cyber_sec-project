@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import Note
+from django.contrib.auth.hashers import make_password
 from cryptography.fernet import Fernet
 import sqlite3
 
@@ -20,6 +21,7 @@ def caesar_crypt(word):
             val=ord(ch)+turn
         enc=enc+chr(val)
     return enc
+    #return make_password(word)
 
 @login_required
 def addView(request):
