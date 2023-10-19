@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Notes</title>
+</head>
+<body>
+    <h1>My notes</h1>
+    
+    <table>
+        <tr>
+            <th style="text-align:left">Username:</th>
+            <td>{{ user.username }}</td>
+        </tr>
+    </table>
+
+    <form action="logout/" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+    </form>
+
+    <h2>Your Notes</h2>
+
+    <ul>
+        {% for note in Notes %}
+            <li>{{ note }}</li>
+        {% empty %}
+            <li>No Notes found.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add note</h2>
+
+    <form action="add/" method="POST">
+        {% csrf_token %}
+        <input type="text" name="data" id="data" placeholder="Enter your note" required>
+        <input type="submit" value="Add">
+    </form>
+</body>
+</html>
