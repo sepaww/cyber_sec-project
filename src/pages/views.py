@@ -33,8 +33,8 @@ def addView(request):
 
 @login_required
 def homePageView(request):
-    if caesar_crypt(request.user.username)!=request.session['valid']:
-        return render(request, 'pages/bababooey.html')
+    #if caesar_crypt(request.user.username)!=request.session['valid']:
+    #    return render(request, 'pages/bababooey.html')
     Notes = Note.objects.filter(owner=request.user)
     mynotes = [f.data for f in Notes]
     #mynotes = [str(f.data) for f in Notes]
@@ -59,9 +59,9 @@ def registerView(request):
         if User.objects.filter(username=username).count() != 0:
             return HttpResponse('Name not available')
         candidates = [p.strip() for p in open("src\candidates.txt")]
-        for psw in candidates:
-            if psw==password:
-                return HttpResponse('pls try harder with password')
+        #for psw in candidates:
+        #    if psw==password:
+        #        return HttpResponse('pls try harder with password')
         user = User.objects.create_user(username=username, password=password)
         login(request, user)
         request.session['valid']=caesar_crypt(username)
